@@ -111,6 +111,10 @@ migrations/
   2_add_email_index.down.sql
 ```
 
+> **Tip:** I prefer zero-padded version numbers (e.g. `0001_create_users.up.sql`) to keep
+> migrations sorted correctly in directory listings and editors. Both formats work fine with
+> the library — it's purely a naming preference.
+
 ## Development
 
 ```bash
@@ -120,28 +124,4 @@ cd migrate
 
 # Run tests
 go test ./...
-
-# Run linter
-golangci-lint run
-
-# Build CLI
-go build -o migrate ./cmd/migrate
 ```
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feat/my-feature`)
-3. Commit your changes (`git commit -m 'feat: add my feature'`)
-4. Push to the branch (`git push origin feat/my-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgements
-
-This project is a fork of [golang-migrate/migrate](https://github.com/golang-migrate/migrate). All credit for the original implementation goes to the original authors and contributors.
