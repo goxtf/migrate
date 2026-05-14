@@ -105,23 +105,12 @@ Migration files follow the naming convention:
 Example:
 ```
 migrations/
-  1_create_users.up.sql
-  1_create_users.down.sql
-  2_add_email_index.up.sql
-  2_add_email_index.down.sql
+  0001_create_users.up.sql
+  0001_create_users.down.sql
+  0002_add_email_index.up.sql
+  0002_add_email_index.down.sql
 ```
 
-> **Tip:** I prefer zero-padded version numbers (e.g. `0001_create_users.up.sql`) to keep
-> migrations sorted correctly in directory listings and editors. Both formats work fine with
-> the library — it's purely a naming preference.
-
-## Development
-
-```bash
-# Clone the repository
-git clone https://github.com/your-org/migrate.git
-cd migrate
-
-# Run tests
-go test ./...
-```
+> **Tip:** I prefer zero-padded version numbers (e.g. `0001_create_users`) over bare integers — it keeps
+> the files sorted correctly in directory listings and most file explorers. Four digits (`0001`–`9999`)
+> is plenty for any project I've worked on.
