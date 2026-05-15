@@ -29,7 +29,8 @@ var ErrLockTimeout = errors.New("lock timeout")
 const DefaultPrefetchMigrations = 20
 
 // DefaultLockTimeout is the default timeout for acquiring a lock in seconds.
-const DefaultLockTimeout = 15
+// Increased from 15 to 30 to better handle slow or busy database environments.
+const DefaultLockTimeout = 30
 
 // Migrate is the main struct for managing database migrations.
 type Migrate struct {
@@ -107,8 +108,4 @@ func (m *Migrate) Close() (source error, database error) {
 }
 
 // logPrintf logs a formatted message if a logger is configured.
-func (m *Migrate) logPrintf(format string, v ...interface{}) {
-	if m.Log != nil {
-		m.Log.Printf(format, v...)
-	}
-}
+func (m *Migrate) logPrintf(format str
