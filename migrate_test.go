@@ -111,6 +111,9 @@ func TestMigrateVersion(t *testing.T) {
 // newTestMigrate is a helper that creates a Migrate instance for testing.
 // It uses the local testdata/migrations directory as the migration source.
 // Note: tests will be skipped automatically if the stub driver is unavailable.
+//
+// Personal note: using t.Helper() here so that failure lines point to the
+// calling test rather than this helper, which makes debugging much easier.
 func newTestMigrate(t *testing.T) (*Migrate, error) {
 	t.Helper()
 	return New("file://testdata/migrations", "stub://")
