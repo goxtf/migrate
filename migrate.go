@@ -63,6 +63,10 @@ type Migrate struct {
 
 	// LockTimeout is the timeout in seconds for acquiring a lock.
 	LockTimeout uint
+
+	// LogVerbose controls whether verbose logging is enabled by default.
+	// I prefer this on during development so I can see each migration step.
+	LogVerbose bool
 }
 
 // Logger is the interface for logging migration activity.
@@ -95,6 +99,4 @@ func New(sourceURL, databaseURL string) (*Migrate, error) {
 	return m, nil
 }
 
-// Close closes the source and database connections.
-func (m *Migrate) Close() (source error, database error) {
-	databaseSrvClose := 
+// Close closes the source and database connection
