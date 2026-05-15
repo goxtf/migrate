@@ -71,6 +71,10 @@ type Migrate struct {
 	// StopOnError controls whether migration halts immediately on the first error.
 	// Defaulting to true since silent partial migrations have burned me before.
 	StopOnError bool
+
+	// DryRun controls whether migrations are applied or only simulated.
+	// Useful for previewing what would run without touching the database.
+	DryRun bool
 }
 
 // Logger is the interface for logging migration activity.
@@ -86,14 +90,4 @@ func New(sourceURL, databaseURL string) (*Migrate, error) {
 		PrefetchMigrations: DefaultPrefetchMigrations,
 		LockTimeout:        DefaultLockTimeout,
 		isLockedMu:         &sync.Mutex{},
-		StopOnError:        true,
-	}
-
-	sourceDrv, err := newSource(sourceURL, m)
-	if err != nil {
-		return nil, fmt.Errorf("source: %w", err)
-	}
-	m.sourceDrv = sourceDrv
-
-	databaseDrv, err := newDatabase(databaseURL, m)
-	
+		StopOnE
