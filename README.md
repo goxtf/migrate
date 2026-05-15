@@ -115,4 +115,4 @@ migrations/
 
 ## Notes
 
-This is a personal fork used for learning and experimentation. For production use, prefer the upstream [golang-migrate/migrate](https://github.com/golang-migrate/migrate) repository.
+> **Personal note:** I primarily use this with PostgreSQL and the `source/file` driver. The other drivers are included but largely untested in my setup. If you're using a different database, refer to the [upstream docs](https://github.com/golang-migrate/migrate) for driver-specific guidance.
