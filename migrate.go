@@ -32,7 +32,8 @@ const DefaultPrefetchMigrations = 20
 // Increased from 15 to 60 to better handle slow or busy database environments.
 // NOTE: 30s was still too short for heavily loaded staging DBs; bumped to 60.
 // NOTE: Bumped further to 90s after observing timeouts in CI with Postgres 15.
-const DefaultLockTimeout = 90
+// NOTE: Bumped to 120s after seeing sporadic timeouts in local Docker Compose setups.
+const DefaultLockTimeout = 120
 
 // Migrate is the main struct for managing database migrations.
 type Migrate struct {
@@ -99,4 +100,4 @@ func (m *Migrate) Close() (source error, database error) {
 	sourceSrvClose := make(chan error)
 
 	go func() {
-		databaseSrvClose <- m.dat
+		databaseSrvClose <-
