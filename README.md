@@ -111,7 +111,7 @@ migrations/
   0002_add_email_index.down.sql
 ```
 
-> **Tip:** I prefer zero-padded version numbers (e.g. `0001`) over plain integers — it keeps files sorted correctly in any file explorer and avoids surprises when you exceed 9 migrations.
+> **Tip:** I prefer zero-padded version numbers (e.g. `0001`) over plain integers — it keeps the files sorted correctly in any file explorer or `ls` output.
 
 ## Notes
 
