@@ -31,7 +31,8 @@ const DefaultPrefetchMigrations = 20
 // DefaultLockTimeout is the default timeout for acquiring a lock in seconds.
 // Increased from 15 to 60 to better handle slow or busy database environments.
 // NOTE: 30s was still too short for heavily loaded staging DBs; bumped to 60.
-const DefaultLockTimeout = 60
+// NOTE: Bumped further to 90s after observing timeouts in CI with Postgres 15.
+const DefaultLockTimeout = 90
 
 // Migrate is the main struct for managing database migrations.
 type Migrate struct {
