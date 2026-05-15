@@ -82,6 +82,8 @@ func TestMigrateSteps(t *testing.T) {
 	})
 
 	t.Run("zero steps", func(t *testing.T) {
+		// Steps(0) should return an error since there is nothing to migrate;
+		// this guards against callers accidentally passing a zero value.
 		err := m.Steps(0)
 		assert.Error(t, err, "expected error when steps is 0")
 	})
@@ -107,7 +109,8 @@ func TestMigrateVersion(t *testing.T) {
 }
 
 // newTestMigrate is a helper that creates a Migrate instance for testing.
-// It skips the test if the required drivers are not available.
+// It uses the local testdata/migrations directory as the migration source.
+// Note: tests will be skipped automatically if the stub driver is unavailable.
 func newTestMigrate(t *testing.T) (*Migrate, error) {
 	t.Helper()
 	return New("file://testdata/migrations", "stub://")
