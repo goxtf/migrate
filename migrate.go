@@ -67,6 +67,10 @@ type Migrate struct {
 	// LogVerbose controls whether verbose logging is enabled by default.
 	// I prefer this on during development so I can see each migration step.
 	LogVerbose bool
+
+	// StopOnError controls whether migration halts immediately on the first error.
+	// Defaulting to true since silent partial migrations have burned me before.
+	StopOnError bool
 }
 
 // Logger is the interface for logging migration activity.
@@ -82,6 +86,7 @@ func New(sourceURL, databaseURL string) (*Migrate, error) {
 		PrefetchMigrations: DefaultPrefetchMigrations,
 		LockTimeout:        DefaultLockTimeout,
 		isLockedMu:         &sync.Mutex{},
+		StopOnError:        true,
 	}
 
 	sourceDrv, err := newSource(sourceURL, m)
@@ -91,12 +96,4 @@ func New(sourceURL, databaseURL string) (*Migrate, error) {
 	m.sourceDrv = sourceDrv
 
 	databaseDrv, err := newDatabase(databaseURL, m)
-	if err != nil {
-		return nil, fmt.Errorf("database: %w", err)
-	}
-	m.databaseDrv = databaseDrv
-
-	return m, nil
-}
-
-// Close closes the source and database connection
+	
