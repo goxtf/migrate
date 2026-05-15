@@ -75,7 +75,8 @@ func Open(name, url string) (Driver, error) {
 	return driver.Open(url)
 }
 
-// List returns the names of all registered database drivers.
+// List returns the names of all registered database drivers, sorted
+// alphabetically for consistent output.
 func List() []string {
 	driversMu.RLock()
 	defer driversMu.RUnlock()
@@ -95,10 +96,12 @@ var ErrNilVersion = fmt.Errorf("database: no migration version set")
 
 // ErrDirty is returned when the database is in a dirty state,
 // meaning a previous migration failed and must be resolved manually.
+// To recover, either fix the migration and force-set the version, or
+// roll back to the previous version using the -version flag.
 type ErrDirty struct {
 	Version int
 }
 
 func (e ErrDirty) Error() string {
-	return fmt.Sprintf("database: dirty migration version %d — resolve manually or use force", e.Version)
+	return fmt.Sprintf("database: dirty migration version %d: manual intervention required", e.Version)
 }
