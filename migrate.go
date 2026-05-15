@@ -25,7 +25,8 @@ var ErrLocked = errors.New("database locked")
 var ErrLockTimeout = errors.New("lock timeout")
 
 // DefaultPrefetchMigrations is the default number of migrations to prefetch.
-const DefaultPrefetchMigrations = 10
+// Increased from 10 to 20 to reduce I/O round trips on larger migration sets.
+const DefaultPrefetchMigrations = 20
 
 // DefaultLockTimeout is the default timeout for acquiring a lock in seconds.
 const DefaultLockTimeout = 15
@@ -110,44 +111,4 @@ func (m *Migrate) logPrintf(format string, v ...interface{}) {
 	if m.Log != nil {
 		m.Log.Printf(format, v...)
 	}
-}
-
-// logVerbosePrintf logs a formatted message if verbose logging is enabled.
-func (m *Migrate) logVerbosePrintf(format string, v ...interface{}) {
-	if m.Log != nil && m.Log.Verbose() {
-		m.Log.Printf(format, v...)
-	}
-}
-
-// newSource creates a new source driver from the given URL.
-func newSource(url string, m *Migrate) (Source, error) {
-	_ = url
-	_ = m
-	// Source driver registration and instantiation will be implemented
-	// as source drivers are added to the project.
-	return nil, fmt.Errorf("no source driver registered for url: %s", url)
-}
-
-// newDatabase creates a new database driver from the given URL.
-func newDatabase(url string, m *Migrate) (Database, error) {
-	_ = url
-	_ = m
-	// Database driver registration and instantiation will be implemented
-	// as database drivers are added to the project.
-	return nil, fmt.Errorf("no database driver registered for url: %s", url)
-}
-
-// isGracefulStopSet returns true if the graceful stop signal has been received.
-func (m *Migrate) isGracefulStopSet() bool {
-	select {
-	case <-m.GracefulStop:
-		return true
-	default:
-		return false
-	}
-}
-
-// stderr writes a message to standard error.
-func stderr(format string, v ...interface{}) {
-	fmt.Fprintf(os.Stderr, format+"\n", v...)
 }
