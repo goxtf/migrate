@@ -112,7 +112,7 @@ func TestMigrateVersion(t *testing.T) {
 // It uses the local testdata/migrations directory as the migration source.
 // Note: tests will be skipped automatically if the stub driver is unavailable.
 //
-// Personal note: using t.Helper() here so that test failure lines point to the
+// Personal note: using t.Helper() here so that failure lines point to the
 // calling test rather than this helper function, which makes debugging easier.
 func newTestMigrate(t *testing.T) (*Migrate, error) {
 	t.Helper()
