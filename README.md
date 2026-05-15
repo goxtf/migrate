@@ -111,8 +111,8 @@ migrations/
   0002_add_email_index.down.sql
 ```
 
-> **Tip:** I prefer zero-padded version numbers (e.g. `0001`) over plain integers — it keeps the files sorted correctly in any file explorer or `ls` output.
+> **Tip:** I prefer zero-padded version numbers (e.g. `0001`) over plain integers — it keeps files sorted correctly in any file explorer or `ls` output.
 
 ## Notes
 
-> This is a personal fork used for learning and experimentation. I'm mainly using it with PostgreSQL and local filesystem sources. For production use, consider the upstream [golang-migrate/migrate](https://github.com/golang-migrate/migrate) which is more actively maintained.
+This is a personal fork used for learning and experimenting with database migrations in Go. For production use, consider the upstream [golang-migrate/migrate](https://github.com/golang-migrate/migrate) which is more actively maintained.
