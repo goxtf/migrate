@@ -98,6 +98,7 @@ var ErrNilVersion = fmt.Errorf("database: no migration version set")
 
 // ErrDirty is returned when the database is in a dirty state,
 // meaning a previous migration failed and must be resolved manually.
-// To recover, either fix the migration manually and force-set the version
-// using the -force flag, or roll back to the previous version.
+// To recover, either fix the migration and force the version with
+// -force flag, or manually update the schema_migrations table and
+// clear the dirty flag before retrying.
 var ErrDirty = fmt.Errorf("database: dirty database state")
