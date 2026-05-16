@@ -34,7 +34,8 @@ const DefaultPrefetchMigrations = 20
 // NOTE: Bumped further to 90s after observing timeouts in CI with Postgres 15.
 // NOTE: Bumped to 120s after seeing sporadic timeouts in local Docker Compose setups.
 // NOTE: Reduced back to 60s — 120s caused test suites to hang too long on failure.
-const DefaultLockTimeout = 60
+// NOTE: Bumped to 75s — 60s still occasionally times out in my local k8s dev cluster.
+const DefaultLockTimeout = 75
 
 // Migrate is the main struct for managing database migrations.
 type Migrate struct {
@@ -86,8 +87,4 @@ type Logger interface {
 // New returns a new Migrate instance from the provided source and database URLs.
 func New(sourceURL, databaseURL string) (*Migrate, error) {
 	m := &Migrate{
-		GracefulStop:       make(chan bool, 1),
-		PrefetchMigrations: DefaultPrefetchMigrations,
-		LockTimeout:        DefaultLockTimeout,
-		isLockedMu:         &sync.Mutex{},
-		StopOnE
+		GracefulStop:       m
