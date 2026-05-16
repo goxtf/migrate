@@ -5,6 +5,7 @@ package database
 import (
 	"fmt"
 	"io"
+	"sort"
 	"sync"
 )
 
@@ -85,6 +86,7 @@ func List() []string {
 	for name := range drivers {
 		list = append(list, name)
 	}
+	sort.Strings(list)
 	return list
 }
 
@@ -96,12 +98,4 @@ var ErrNilVersion = fmt.Errorf("database: no migration version set")
 
 // ErrDirty is returned when the database is in a dirty state,
 // meaning a previous migration failed and must be resolved manually.
-// To recover, either fix the migration and force-set the version, or
-// roll back to the previous version using the -version flag.
-type ErrDirty struct {
-	Version int
-}
-
-func (e ErrDirty) Error() string {
-	return fmt.Sprintf("database: dirty migration version %d: manual intervention required", e.Version)
-}
+// To recover, either fix the migration and force-set the version,
